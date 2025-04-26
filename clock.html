@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clock and Timer</title>
+    <link rel="stylesheet" href="clock.css" />
+</head>
+<body>
+    <div>
+        <h1>Current Time</h1>
+        <p id="clock"></p>
+    </div>
+
+    <div>
+        <h1>Timer Clock</h1>
+        <div class="timer-inputs">
+            <label for="minutes">Minutes:</label>
+            <input type="number" id="minutes" min="0" value="0" />
+            <label for="seconds">Seconds:</label>
+            <input type="number" id="seconds" min="0" max="59" value="0" />
+        </div>
+        <div class="timer-display" id="timer">00:00</div>
+        <div class="timer-controls">
+            <button id="startBtn">Start</button>
+            <button id="pauseBtn" disabled>Pause</button>
+            <button id="resetBtn" disabled>Reset</button>
+        </div>
+    </div>
+
+    <script>
+        // Current clock
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Timer clock
+        let timerInterval = null;
+        let remainingTime = 0;
+        let isPaused = false;
+
+        const timerDisplay = document.getElementById('timer');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const minutesInput = document.getElementById('minutes');
+        const secondsInput = document.getElementById('seconds');
+
+        function updateTimerDisplay(time) {
+            const mins = Math.floor(time / 60);
+            const secs = time % 60;
+            timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            if (timerInterval) return; // Prevent multiple intervals
+            let mins = parseInt(minutesInput.value, 10);
+            let secs = parseInt(secondsInput.value, 10);
+            if (isNaN(mins) || mins < 0) mins = 0;
+            if (isNaN(secs) || secs < 0 || secs > 59) secs = 0;
+            if (remainingTime === 0) {
+                remainingTime = mins * 60 + secs;
+            }
+            if (remainingTime <= 0) return;
+
+            startBtn.disabled = true;
+            pauseBtn.disabled = false;
+            resetBtn.disabled = false;
+            minutesInput.disabled = true;
+            secondsInput.disabled = true;
+
+            timerInterval = setInterval(() => {
+                if (!isPaused) {
+                    if (remainingTime > 0) {
+                        remainingTime--;
+                        updateTimerDisplay(remainingTime);
+                    } else {
+                        clearInterval(timerInterval);
+                        timerInterval = null;
+                        alert('Timer finished!');
+                        startBtn.disabled = false;
+                        pauseBtn.disabled = true;
+                        resetBtn.disabled = false;
+                        minutesInput.disabled = false;
+                        secondsInput.disabled = false;
+                    }
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            isPaused = !isPaused;
+            pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            isPaused = false;
+            remainingTime = 0;
+            updateTimerDisplay(0);
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+            pauseBtn.textContent = 'Pause';
+            resetBtn.disabled = true;
+            minutesInput.disabled = false;
+            secondsInput.disabled = false;
+        }
+
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+
+        updateTimerDisplay(0);
+    </script>
+</body>
+</html>

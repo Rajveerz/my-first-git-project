@@ -1,0 +1,5 @@
+# Ignore system files
+$Recycle.Bin/
+Program Files/
+ProgramData/
+Windows/

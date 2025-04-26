@@ -1,0 +1,141 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 60vw;
+    margin: 10;
+    background-color: #e9ecef;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 360px;
+}
+
+.card, .back-card {
+    border-style: solid;
+    border-radius: 15px;
+    border-color: #11d2cc;
+    background: linear-gradient(135deg, #f9f9f9 0%, #e0f7fa 100%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    margin-top: 0px;
+    width: 320px;
+    height: 220px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(6, 5, 5);
+    text-align: center;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.Card-Image, .second-image {
+    display: inline-block;
+    padding: 0;
+    margin-top: 0;
+}
+
+.Card-Image {
+    width: 5%;
+    align-content: left;
+}
+
+.second-image {
+    width: auto;
+}
+
+.card-header-title {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 0;
+    font-family: Arial, sans-serif;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+ul {
+    display: inline-block;
+    width: auto;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-left: 50px;
+}
+
+h3 {
+    font-size: 25px;
+    align-items: center;
+    font-weight: bold;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.bottom-line {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+p {
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.z {
+    padding-top: 10px;
+    font-size: 25px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(6, 5, 5);
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 0;
+}
+
+.x {
+    font-size: 10px;
+    font-family: Arial, sans-serif;
+}
+
+
